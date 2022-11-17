@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Book Store</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Single Book</h1>
+    <p>Title: {{book.title}}</p>
+    <p>Author: {{book.author_name}}</p>
+
+    <form action="/books/{{book.id}}/delete" method="post">
+      <input type="submit" value="Delete Book">
+    </form>
+
+    <a href="/books">Back to all books</a>
+  </body>
+</html>
