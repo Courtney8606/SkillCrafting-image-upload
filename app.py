@@ -15,6 +15,9 @@ app = Flask(__name__)
 #   ; open http://localhost:5000/emoji
 @app.route('/emoji', methods=['GET'])
 def get_emoji():
+    # We use `render_template` to send the user the file `emoji.html`
+    # But first, it gets processed to look for placeholders like {{ emoji }}
+    # These placeholders are replaced with the values we pass in as arguments
     return render_template('emoji.html', emoji=':)')
 
 # This imports some more example routes for you to see how they work
