@@ -28,13 +28,25 @@ We can retrieve a single book
 """
 def test_get_book(db_connection, page, test_web_address):
     db_connection.seed("seeds/book_store.sql")
+
+    # We visit the books page
     page.goto(f"http://{test_web_address}/books")
+
+    # Click the link with the text 'Emma by Jane Austen'
     page.click("text=Emma by Jane Austen")
-    paragraph_tags = page.locator("p")
-    expect(paragraph_tags).to_have_text([
-        "Title: Emma",
-        "Author: Jane Austen",
-    ])
+
+    # The virtual browser acts just like a normal browser and goes to the next
+    # page without us having to tell it to.
+
+    # Then we look for specific test classes that we have put into the HTML
+    # as targets for our tests to look for. This one is called `t-title`.
+    # You can see it in `templates/books/show.html`
+    title_element = page.locator(".t-title")
+    expect(title_element).to_have_text("Emma")
+
+    # We do the same for the author name
+    author_element = page.locator(".t-author-name")
+    expect(author_element).to_have_text("Jane Austen")
 
 
 """
@@ -44,15 +56,27 @@ We see it in the books index
 def test_create_book(db_connection, page, test_web_address):
     db_connection.seed("seeds/book_store.sql")
     page.goto(f"http://{test_web_address}/books")
+
+    # This time we click the link with the text 'Add a new book'
     page.click("text=Add a new book")
+
+    # Then we fill out the field with the name attribute 'title'
     page.fill("input[name='title']", "The Hobbit")
+
+    # And the field with the name attribute 'author_name'
     page.fill("input[name='author_name']", "J.R.R. Tolkien")
+
+    # Finally we click the button with the text 'Create Book'
     page.click("text=Create Book")
-    paragraph_tags = page.locator("p")
-    expect(paragraph_tags).to_have_text([
-        "Title: The Hobbit",
-        "Author: J.R.R. Tolkien",
-    ])
+
+    # Just as before, the virtual browser acts just like a normal browser and
+    # goes to the next page without us having to tell it to.
+
+    title_element = page.locator(".t-title")
+    expect(title_element).to_have_text("The Hobbit")
+
+    author_element = page.locator(".t-author-name")
+    expect(author_element).to_have_text("J.R.R. Tolkien")
 
 
 """

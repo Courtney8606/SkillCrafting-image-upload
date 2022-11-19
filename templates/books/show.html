@@ -6,8 +6,8 @@
   </head>
   <body>
     <h1>Single Book</h1>
-    <p>Title: {{book.title}}</p>
-    <p>Author: {{book.author_name}}</p>
+    <p class="t-title">Title: {{book.title}}</p>
+    <p class="t-author-name">Author: {{book.author_name}}</p>
 
     <form action="/books/{{book.id}}/delete" method="post">
       <input type="submit" value="Delete Book">
