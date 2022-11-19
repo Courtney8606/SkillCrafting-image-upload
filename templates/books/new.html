@@ -8,6 +8,15 @@
     <h1>New Book</h1>
     <!-- This creates a form that will submit to POST /books -->
     <form action="/books" method="post">
+
+      <!-- We check to see if there are any errors from a previous submission -->
+      {% if errors %}
+        <!-- If so, we show them. -->
+        <p class="t-errors">
+          There were errors with your submission: {{ errors }}
+        </p>
+      {% endif %}
+
       <p>
         <!-- These `label` tags are important for accessibility -->
         <label for="title">Title</label>

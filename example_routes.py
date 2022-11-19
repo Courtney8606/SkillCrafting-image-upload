@@ -46,6 +46,10 @@ def apply_example_routes(app):
         # Create a book object
         book = Book(None, title, author_name)
 
+        # Check for validity and if not valid, show the form again with errors
+        if not book.is_valid():
+            return render_template('books/new.html', book=book, errors=book.generate_errors()), 400
+
         # Save the book to the database
         book = repository.create(book)
 
@@ -66,3 +70,4 @@ def apply_example_routes(app):
         # that generates the route and any arguments that are needed to generate
         # the URL.
         return redirect(url_for('get_books'))
+

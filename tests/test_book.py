@@ -28,3 +28,27 @@ def test_books_are_equal():
     assert book1 == book2
     # Try commenting out the `__eq__` method in lib/book.py
     # And see what happens when you run this test again.
+
+"""
+We can assess a book for validity
+"""
+def test_book_validity():
+    assert Book(1, "", "").is_valid() == False
+    assert Book(1, "Title", "").is_valid() == False
+    assert Book(1, "", "Author").is_valid() == False
+    assert Book(1, "Title", None).is_valid() == False
+    assert Book(1, None, "Author").is_valid() == False
+    assert Book(1, "Title", "Author").is_valid() == True
+    assert Book(None, "Title", "Author").is_valid() == True
+
+"""
+We can generate errors for an invalid book
+"""
+def test_book_errors():
+    assert Book(1, "", "").generate_errors() == "Title can't be blank, Author name can't be blank"
+    assert Book(1, "Title", "").generate_errors() == "Author name can't be blank"
+    assert Book(1, "", "Author").generate_errors() == "Title can't be blank"
+    assert Book(1, "Title", None).generate_errors() == "Author name can't be blank"
+    assert Book(1, None, "Author").generate_errors() == "Title can't be blank"
+    assert Book(1, "Title", "Author").generate_errors() == None
+    assert Book(None, "Title", "Author").generate_errors() == None
