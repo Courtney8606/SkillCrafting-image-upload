@@ -40,6 +40,13 @@ parts of the project work, or you can delete it and start from scratch.
 
 # Seed the development database (ensure you have run `pipenv shell` first)
 ; python seed_dev_database.py
+
+# Run the tests (with extra logging)
+; pytest -sv
+
+# Run the app
+; python app.py
+# Now visit http://localhost:5000/emoji in your browser
 ```
 
 If you would like to remove the example code:
@@ -47,32 +54,6 @@ If you would like to remove the example code:
 ```shell
 ; ./remove_example_code.sh
 ```
-
-## Running the tests
-
-```shell
-# To run the tests you will need two terminals, one to run the test server
-# and one to run the tests. The test server must be running for the tests
-# to work.
-
-# In one terminal:
-; ./run_test_server.sh
-
-# In another terminal
-; pipenv run pytest
-```
-
-## Running the dev server
-
-Make sure you've stopped running the test server, and then:
-
-```shell
-# To run the web server
-; flask --debug run
-# Now visit http://localhost:5000/emoji in your browser
-```
-
-
 
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->

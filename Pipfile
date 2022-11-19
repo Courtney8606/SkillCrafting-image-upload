@@ -8,6 +8,8 @@ pytest = "*"
 psycopg = "*"
 flask = "*"
 pytest-playwright = "*"
+pytest-xprocess = "*"
+py = "*"
 
 [dev-packages]
 autopep8 = "*"
