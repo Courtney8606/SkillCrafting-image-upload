@@ -24,6 +24,7 @@ def apply_example_routes(app):
         book = repository.find(id)
         return render_template('books/show.html', book=book)
 
+
     # GET /books/new
     # Returns a form to create a new book
     @app.route('/books/new', methods=['GET'])
