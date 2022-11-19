@@ -8,7 +8,9 @@
     <h1>Books</h1>
     <ul>
       {% for book in books %}
-        <li><a href="/books/{{book.id}}">{{book.title}} by {{book.author_name}}</li></a></li>
+        <li>
+          <a href="/books/{{book.id}}">{{book.title}} by {{book.author_name}}</li>
+        </a>
       {% endfor %}
     </ul>
 
