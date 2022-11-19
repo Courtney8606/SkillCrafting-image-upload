@@ -35,11 +35,22 @@ def apply_example_routes(app):
     # Creates a new book
     @app.route('/books', methods=['POST'])
     def create_book():
+        # Set up the database connection and repository
         connection = get_flask_database_connection()
         repository = BookRepository(connection)
-        book = Book(None, request.form['title'], request.form['author_name'])
+
+        # Get the fields from the request form
+        title = request.form['title']
+        author_name = request.form['author_name']
+
+        # Create a book object
+        book = Book(None, title, author_name)
+
+        # Save the book to the database
         book = repository.create(book)
-        return redirect(url_for('get_book', id=book.id))
+
+        # Redirect to the book's show route to the user can see it
+        return redirect(f"/books/{book.id}")
 
 
     # POST /books/<id>/delete
@@ -49,4 +60,9 @@ def apply_example_routes(app):
         connection = get_flask_database_connection()
         repository = BookRepository(connection)
         repository.delete(id)
+
+        # Typically we use the `url_for` function in Flask to generate URLs
+        # rather than hand-writing them. `url_for` takes the name of the function
+        # that generates the route and any arguments that are needed to generate
+        # the URL.
         return redirect(url_for('get_books'))
