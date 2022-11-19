@@ -10,7 +10,6 @@ We can get an emoji from the /emoji page
 def test_get_emoji(page, test_web_address): # Note new parameters
     # We load a virtual browser and navigate to the /emoji page
     page.goto(f"http://{test_web_address}/emoji")
-    page.screenshot(path="screenshot.png", full_page=True)
 
     # We look at the <strong> tag
     strong_tag = page.locator("strong")
