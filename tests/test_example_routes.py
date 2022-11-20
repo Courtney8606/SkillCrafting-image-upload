@@ -15,11 +15,11 @@ def test_get_books(db_connection, page, test_web_address):
 
     # We assert that it has the books in it
     expect(list_items).to_have_text([
-        "Nineteen Eighty-Four by George Orwell",
-        "Mrs Dalloway by Virginia Woolf",
-        "Emma by Jane Austen",
-        "Dracula by Bram Stoker",
-        "The Age of Innocence by Edith Wharton",
+        "Invisible Cities by Italo Calvino",
+        "The Man Who Was Thursday by GK Chesterton",
+        "Bluets by Maggie Nelson",
+        "No Place on Earth by Christa Wolf",
+        "Nevada by Imogen Binnie",
     ])
 
 
@@ -32,8 +32,8 @@ def test_get_book(db_connection, page, test_web_address):
     # We visit the books page
     page.goto(f"http://{test_web_address}/books")
 
-    # Click the link with the text 'Emma by Jane Austen'
-    page.click("text=Emma by Jane Austen")
+    # Click the link with the text 'Bluets by Maggie Nelson'
+    page.click("text=Bluets by Maggie Nelson")
 
     # The virtual browser acts just like a normal browser and goes to the next
     # page without us having to tell it to.
@@ -42,11 +42,11 @@ def test_get_book(db_connection, page, test_web_address):
     # as targets for our tests to look for. This one is called `t-title`.
     # You can see it in `templates/books/show.html`
     title_element = page.locator(".t-title")
-    expect(title_element).to_have_text("Title: Emma")
+    expect(title_element).to_have_text("Title: Bluets")
 
     # We do the same for the author name
     author_element = page.locator(".t-author-name")
-    expect(author_element).to_have_text("Author: Jane Austen")
+    expect(author_element).to_have_text("Author: Maggie Nelson")
 
 
 """
@@ -97,13 +97,13 @@ We no longer see it in the books index
 def test_delete_book(db_connection, page, test_web_address):
     db_connection.seed("seeds/book_store.sql")
     page.goto(f"http://{test_web_address}/books")
-    page.click("text=Nineteen Eighty-Four by George Orwell")
+    page.click("text=Invisible Cities by Italo Calvino")
     page.click("text=Delete Book")
     list_items = page.locator("li")
     expect(list_items).to_have_text([
-        "Mrs Dalloway by Virginia Woolf",
-        "Emma by Jane Austen",
-        "Dracula by Bram Stoker",
-        "The Age of Innocence by Edith Wharton",
+        "The Man Who Was Thursday by GK Chesterton",
+        "Bluets by Maggie Nelson",
+        "No Place on Earth by Christa Wolf",
+        "Nevada by Imogen Binnie",
     ])
 
