@@ -11,8 +11,8 @@
       {% for book in books %}
         <li>
           <!-- We can use {{ placeholders }} in HTML attributes too -->
-          <a href="/books/{{book.id}}">{{book.title}} by {{book.author_name}}</li>
-        </a>
+          <a href="/books/{{book.id}}">{{book.title}} by {{book.author_name}}</a>
+        </li>
       {% endfor %}
       <!-- Jinja isn't Python, so we need an endfor to close the loop -->
     </ul>
