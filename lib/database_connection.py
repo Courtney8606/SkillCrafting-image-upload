@@ -68,9 +68,9 @@ class DatabaseConnection:
         else:
             return self.DEV_DATABASE_NAME
 
-# This function integrates with Flask to create one databse connection that
+# This function integrates with Flask to create one database connection that
 # Flask request can use. To see how to use it, look at example_routes.py
-def get_flask_database_connection():
+def get_flask_database_connection(app):
     if not hasattr(g, 'flask_database_connection'):
         g.flask_database_connection = DatabaseConnection(
             test_mode=os.getenv('APP_ENV') == 'test')

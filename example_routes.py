@@ -9,7 +9,7 @@ def apply_example_routes(app):
     # Returns a list of books
     @app.route('/books', methods=['GET'])
     def get_books():
-        connection = get_flask_database_connection()
+        connection = get_flask_database_connection(app)
         repository = BookRepository(connection)
         books = repository.all()
         return render_template('books/index.html', books=books)
@@ -19,7 +19,7 @@ def apply_example_routes(app):
     # Returns a single book
     @app.route('/books/<int:id>', methods=['GET'])
     def get_book(id):
-        connection = get_flask_database_connection()
+        connection = get_flask_database_connection(app)
         repository = BookRepository(connection)
         book = repository.find(id)
         return render_template('books/show.html', book=book)
@@ -37,7 +37,7 @@ def apply_example_routes(app):
     @app.route('/books', methods=['POST'])
     def create_book():
         # Set up the database connection and repository
-        connection = get_flask_database_connection()
+        connection = get_flask_database_connection(app)
         repository = BookRepository(connection)
 
         # Get the fields from the request form
@@ -62,7 +62,7 @@ def apply_example_routes(app):
     # Deletes a book
     @app.route('/books/<int:id>/delete', methods=['POST'])
     def delete_book(id):
-        connection = get_flask_database_connection()
+        connection = get_flask_database_connection(app)
         repository = BookRepository(connection)
         repository.delete(id)
 
