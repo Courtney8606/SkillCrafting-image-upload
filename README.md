@@ -48,7 +48,7 @@ There are two videos to support:
 
 # Run the app
 ; python app.py
-# Now visit http://localhost:5000/emoji in your browser
+# Now visit http://localhost:5001/emoji in your browser
 ```
 
 If you would like to remove the example code:
