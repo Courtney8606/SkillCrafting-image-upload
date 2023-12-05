@@ -14,6 +14,11 @@ class BookRepository:
             item = Book(row["id"], row["title"], row["author_name"])
             books.append(item)
         return books
+    
+    def all_json(self):
+        rows = self._connection.execute('SELECT * FROM books')
+
+        return rows
 
     # Find a single book by its id
     def find(self, book_id):
