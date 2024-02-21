@@ -12,16 +12,8 @@ def apply_example_routes(app):
         connection = get_flask_database_connection(app)
         repository = BookRepository(connection)
         books = repository.all()
-
         return render_template('books/index.html', books=books)
 
-    @app.route('/api/books', methods=['GET'])
-    def get_boots_api():
-        connection = get_flask_database_connection(app)
-        repository = BookRepository(connection)
-
-        books = repository.all_json()
-        return books
 
     # GET /books/<id>
     # Returns a single book
