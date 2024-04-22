@@ -1,35 +1,68 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash, redirect, url_for
+import urllib.request
+from werkzeug.utils import secure_filename
 from lib.database_connection import get_flask_database_connection
+from lib.image_repository import ImageRepository
+from lib.image import Image
+
+import psycopg2
+import psycopg2.extras
 
 # Create a new Flask app
 app = Flask(__name__)
 
-# == Your Routes Here ==
+UPLOAD_FOLDER = 'static/uploads/'
+
+app.secret_key = "secret key"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
-# == Example Code Below ==
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
-# GET /emoji
-# Returns a smiley face in HTML
-# Try it:
-#   ; open http://localhost:5001/emoji
-@app.route('/emoji', methods=['GET'])
-def get_emoji():
-    # We use `render_template` to send the user the file `emoji.html`
-    # But first, it gets processed to look for placeholders like {{ emoji }}
-    # These placeholders are replaced with the values we pass in as arguments
-    return render_template('emoji.html', emoji=':)')
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# This imports some more example routes for you to see how they work
-# You can delete these lines if you don't need them.
-from example_routes import apply_example_routes
-apply_example_routes(app)
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html')
 
-# == End Example Code ==
+@app.route('/', methods=['POST'])
+def upload_image():
+    connection = get_flask_database_connection(app)
+    repository = ImageRepository(connection)
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        print('upload_image filename: ' + filename)
+        image = Image(None, filename)
+        repository.create(image)
+        flash('Image successfully loaded and displayed below')
+        return render_template('index.html', filename=filename)
+    else:
+        flash('Allowed image types are - png, jpg, jpeg, gif')
+        return redirect(request.url)
+    
+@app.route('/display/<filename>')
+def display_image(filename):
+    #print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-# These lines start the server if you run this file directly
-# They also start the server configured to use the test database
-# if started in test mode.
+@app.route('/images', methods=['GET'])
+def return_all():
+    connection = get_flask_database_connection(app)
+    repository = ImageRepository(connection)
+    images = repository.all()
+    return render_template("display.html", images=images)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5001)))

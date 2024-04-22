@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>Images</title>
+  </head>
+  <body>
+    <h1>Images</h1>
+
+    {% for image in images %}
+
+        <div>
+        <h2>
+        Image{{image.id}} <img src="static/uploads/{{image.title}}" style="max-width: 200px; max-height: auto;">
+        </h2>
+        </div>
+    
+    {% endfor %}
+
+    <a href="/">Home</a>
+  </body>
+</html>

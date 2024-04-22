@@ -1,4 +1,4 @@
-from lib.book import Book
+from lib.image import Book
 
 """
 Book constructs with an id, title and author_name

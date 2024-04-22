@@ -1,6 +1,6 @@
 from lib.database_connection import get_flask_database_connection
-from lib.book_repository import BookRepository
-from lib.book import Book
+from lib.image_repository import BookRepository
+from lib.image import Book
 from flask import request, render_template, redirect, url_for
 
 # You won't need to nest your routes in app.py in a method like this

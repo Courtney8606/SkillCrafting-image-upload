@@ -1,5 +1,5 @@
-from lib.book_repository import BookRepository
-from lib.book import Book
+from lib.image_repository import BookRepository
+from lib.image import Book
 
 """
 When we call BookRepository#all
