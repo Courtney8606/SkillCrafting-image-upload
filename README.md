@@ -1,69 +1,30 @@
-# Flask HTML Web & Database Project Starter
+A small project working on the skill to upload an image and store it in a database. 
 
-This is a starter project for you to use to start your Flask HTML web & database
-projects.
+## Installation instructions
 
-It contains quite a lot of example code. You can use this to see how the various
-parts of the project work, or you can delete it and start from scratch.
+These instructions are for macOS, and it is assumed that that the following are already installed:
 
-There are two videos to support:
+* pipenv
+* python 
+* PostgreSQL 
 
-* [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
-* [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s) 
+After cloning the repository, using the CLI, change into the top-level directory of the locally cloned version. Then execute the following commands in sequence:
 
-## Setup
+**Install any dependencies and set up your virtual environment**
+* pipenv install 
 
-```shell
-# Clone the repository to your local machine
-; git clone git@github.com:makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
+**Activate your virtual environment**
+* pipenv shell
 
-# Or, if you don't have SSH keys set up
-; git clone https://github.com/makersacademy/web-applications-in-python-project-starter-html.git YOUR_PROJECT_NAME
+**Create a development database**
+* createdb uploads
 
-# Enter the directory
-; cd YOUR_PROJECT_NAME
+**Seed your databases**
+* psql uploads < seeds/upload.sql
 
-# Install dependencies and set up the virtual environment
-; pipenv install
-
-# Activate the virtual environment
-; pipenv shell
-
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
-
-# Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_test
-
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
-
-# Seed the development database (ensure you have run `pipenv shell` first)
-; python seed_dev_database.py
-
-# Run the tests (with extra logging)
-; pytest -sv
-
-# Run the app
+**Run the app**
 ; python app.py
-# Now visit http://localhost:5001/emoji in your browser
-```
 
-If you would like to remove the example code:
+At this stage, the back-end server should be running. Open the following url in your browser: 
 
-```shell
-; ./remove_example_code.sh
-```
-
-
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
-
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Fweb-applications-in-python-project-starter-html&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
+http://localhost:5001
