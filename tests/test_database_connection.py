@@ -1,5 +1,3 @@
-# This is an example of how to use the DatabaseConnection class
-
 """
 When I seed the database
 I get some records back

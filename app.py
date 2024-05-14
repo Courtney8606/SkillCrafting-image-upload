@@ -9,7 +9,6 @@ from lib.image import Image
 import psycopg2
 import psycopg2.extras
 
-# Create a new Flask app
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/uploads/'
@@ -53,7 +52,6 @@ def upload_image():
     
 @app.route('/display/<filename>')
 def display_image(filename):
-    #print('display_image filename: ' + filename)
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 @app.route('/images', methods=['GET'])
@@ -62,7 +60,6 @@ def return_all():
     repository = ImageRepository(connection)
     images = repository.all()
     return render_template("display.html", images=images)
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
